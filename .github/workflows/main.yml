@@ -11,9 +11,9 @@ jobs:
 
     steps:
     
-    - name: Checkout code
+    - name: Check out code
       uses: actions/checkout@v2
-      
+
     - name: Login to Amazon ECR
       id: login-ecr
       uses: aws-actions/amazon-ecr-login@v1
@@ -28,12 +28,12 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: clo835_mysql
         IMAGE_TAG: v1.0
-      rum: |
-        cd Assignment1/
+      run: |
+      
         ls -ltra
-        
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile_msql .
-        
+        # Docker build
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile_mysql .
+        # Docker push
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
     - name: Build, tag, and push app image to Amazon ECR
@@ -42,9 +42,9 @@ jobs:
         ECR_REPOSITORY: clo835_webapp
         IMAGE_TAG: v1.0
       run: |
-        cd Assignment1/ 
+        
         ls -ltra
-        # Docker build, missing the context `.` at the end of the command
-        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile
-        # Docker push, correct, but relies on the above potentially failed step
+        # Docker build
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile .
+        # Docker push
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG

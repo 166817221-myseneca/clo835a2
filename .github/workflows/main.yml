@@ -6,7 +6,7 @@ on:
     branches: [ "main" ]
 
 jobs:
-  bild:
+  build:
     name: Build Images
     runs-on: ubuntu-lastest 
 

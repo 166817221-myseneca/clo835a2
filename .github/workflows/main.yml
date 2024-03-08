@@ -8,12 +8,12 @@ on:
 jobs:
   bild:
     name: Build Images
-    runs-on: ubuntu-lastest # Misspelled "latest"
+    runs-on: ubuntu-lastest 
 
     steps:
     
-    - name: Checkout code # Missing the "uses" directive causing a syntax error
-      uses: actions/checkout@v3 # Version mismatch, suppose to use v2 for this example
+    - name: Checkout code 
+      uses: actions/checkout@v3
 
     - name: Login to Amazon ECR
       id: login-ecr
@@ -32,9 +32,9 @@ jobs:
       rum: |
         cd Assignment1/
         ls -ltra
-        # Docker build, but the Dockerfile_mysql might be incorrectly named or missing
+        
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile_msql .
-        # Docker push, correct, but relies on the above potentially failed step
+        
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         
     - name: Build, tag, and push app image to Amazon ECR

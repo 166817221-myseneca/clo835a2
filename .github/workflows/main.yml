@@ -11,8 +11,9 @@ jobs:
 
     steps:
     
-    - name: Check out code
-      uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v1
+
 
 
     - name: Login to Amazon ECR

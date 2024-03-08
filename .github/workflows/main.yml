@@ -1,12 +1,12 @@
 name: Deploy to ECR
 
-# Triggered not only on push but also includes an incorrect event name "pushe"
+
 on: 
   pushe:
     branches: [ "main" ]
 
 jobs:
-  bild: # Misspelled "build"
+  bild:
     name: Build Images
     runs-on: ubuntu-lastest # Misspelled "latest"
 
@@ -29,7 +29,7 @@ jobs:
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: clo835_mysql
         IMAGE_TAG: v1.0
-      rum: | # Misspelled "run"
+      rum: |
         cd Assignment1/
         ls -ltra
         # Docker build, but the Dockerfile_mysql might be incorrectly named or missing
@@ -43,7 +43,7 @@ jobs:
         ECR_REPOSITORY: clo835_webapp
         IMAGE_TAG: v1.0
       run: |
-        cd Assignment1/ # Assuming Assignment1 directory exists and is correct
+        cd Assignment1/ 
         ls -ltra
         # Docker build, missing the context `.` at the end of the command
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f Dockerfile
